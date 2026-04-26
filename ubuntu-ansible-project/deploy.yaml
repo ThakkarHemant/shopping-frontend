@@ -1,0 +1,48 @@
+---
+- name: Configure EC2 Instance and Launch Frontend
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: latest
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Install Docker engine
+      apt:
+        name: docker-ce
+        state: latest
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    # Note: In a real Jenkins pipeline, Jenkins would build the image and push to ECR.
+    # For this manual test, we are just ensuring the environment is ready.
+    - name: Test Docker connection
+      command: docker --version
+      register: docker_check
+
+    - name: Print Docker version
+      debug:
+        msg: "Docker version is {{ docker_check.stdout }}"
