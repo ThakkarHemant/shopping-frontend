@@ -6,21 +6,22 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of your code and build the production bundle
+# Copy the rest of your code
 COPY . .
+
+# INJECT THE SECRETS HERE
+ARG REACT_APP_UNSPLASH_KEY
+ARG REACT_APP_API_URL
+
+ENV REACT_APP_UNSPLASH_KEY=$REACT_APP_UNSPLASH_KEY
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
+# Build the production bundle
 RUN npm run build
 
 # Stage 2: Serve the App with Nginx
 FROM nginx:alpine
-
-# Copy the Nginx configuration we will make next
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy the compiled React files from the build stage
 COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
