@@ -10,7 +10,7 @@ import CustomerHome from './pages/CustomerHome';
 import Cart from './pages/Cart';
 import SellerDashboard from './pages/SellerDashboard';
 import MyOrders from './pages/MyOrders';
-import Profile from './Profile'; // <-- 2. Import the new Profile page
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
