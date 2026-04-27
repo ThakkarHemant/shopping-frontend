@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import api from './api';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -21,8 +22,7 @@ export default function Login() {
             formData.append('username', username);
             formData.append('password', password);
 
-            // Point this to your EKS tunnel port (8080)
-            const response = await axios.post('http://localhost:8080/login', formData, {
+            const response = await api.post('/login', formData, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },

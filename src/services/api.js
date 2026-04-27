@@ -1,8 +1,9 @@
 import axios from 'axios';
+// The logic: Use the injected URL first, then fallback
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
-// Create a central connection to your EKS tunnel
 const api = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: API_BASE_URL,
 });
 
 // Intercept every request before it leaves the browser and attach the token

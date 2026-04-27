@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import api from './api';
 
 export default function Register() {
     const [username, setUsername] = useState('');
@@ -18,7 +19,7 @@ export default function Register() {
 
         try {
             // Send the JSON payload to the backend tunnel
-            await axios.post('http://localhost:8080/register', {
+            await api.post('/register', {
                 username: username,
                 password: password
             });
