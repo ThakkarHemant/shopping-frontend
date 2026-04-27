@@ -22,18 +22,18 @@ export default function Login() {
             formData.append('username', username);
             formData.append('password', password);
 
-            // const response = await api.post('/login', formData, {
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //     },
-            // });
-            // Point this to your EKS tunnel port (8080)
-
-            const response = await axios.post('http://localhost:8080/login', formData, {
+            const response = await api.post('/login', formData, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             });
+            // Point this to your EKS tunnel port (8080)
+
+            // const response = await axios.post('http://localhost:8080/login', formData, {
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //     },
+            // });
 
             // Save the secure token to the browser
             const token = response.data.access_token;
