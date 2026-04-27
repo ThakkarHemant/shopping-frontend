@@ -19,7 +19,11 @@ export default function Register() {
 
         try {
             // Send the JSON payload to the backend tunnel
-            await api.post('/register', {
+            // await api.post('/register', {
+            //     username: username,
+            //     password: password
+            // });
+            await axios.post('http://localhost:8080/register', {
                 username: username,
                 password: password
             });
