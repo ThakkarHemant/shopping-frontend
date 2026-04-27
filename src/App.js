@@ -14,7 +14,6 @@ import Profile from './pages/Profile';
 
 export default function App() {
   return (
-    /* 3. Wrap the entire app in AuthProvider so every page has access to the user's login state */
     <AuthProvider>
       <CartProvider>
         <Router>
@@ -30,10 +29,8 @@ export default function App() {
               <Route path="/seller" element={<ProtectedRoute><SellerDashboard /></ProtectedRoute>} />
               <Route path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
 
-              {/* 4. Add the protected route for the Profile page */}
               <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-              {/* The Home page is locked behind the security guard */}
               <Route
                 path="/home"
                 element={

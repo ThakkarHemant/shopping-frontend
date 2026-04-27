@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import api from './api';
+import api from '../services/api';
 
 export default function Login() {
     const [username, setUsername] = useState('');

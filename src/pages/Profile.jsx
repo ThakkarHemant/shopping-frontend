@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import api from './api';
+import api from '../services/api';
 
 const Profile = () => {
     const { user, logout } = useContext(AuthContext);
